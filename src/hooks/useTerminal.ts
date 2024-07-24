@@ -6,6 +6,7 @@ import { SearchAddon } from "@xterm/addon-search";
 import { colors } from "../utils/colors";
 import { printHome } from "../utils/commands";
 import * as keys from "../utils/keys";
+import { showAutocomplete } from "../utils/autocomplete";
 
 export const useTerminal = () => {
     const [history, setHistory] = useState<string[]>([]);
@@ -63,7 +64,15 @@ export const useTerminal = () => {
 
                 switch (ev.key) {
                     case "Enter":
-                        keys.Enter(term, commandBuffer, history, autocompleteBuffer, updateCommandBuffer, setHistoryIndex);
+                        keys.Enter(
+                            term,
+                            commandBuffer,
+                            history,
+                            autocompleteBuffer,
+                            updateCommandBuffer,
+                            updateAutocompleteBuffer,
+                            setHistoryIndex
+                        );
                         setHistory(prev => [commandBuffer, ...prev]);
                         break;
                     case "Backspace":
@@ -80,7 +89,9 @@ export const useTerminal = () => {
                         break;
                     default:
                         if (printable) {
-                            keys.printable(term, commandBuffer, e, updateCommandBuffer, updateAutocompleteBuffer);
+                            commandBuffer += e.key;
+                            term.write(e.key);
+                            showAutocomplete(term, commandBuffer, updateAutocompleteBuffer);
                         }
                         break;
                 }

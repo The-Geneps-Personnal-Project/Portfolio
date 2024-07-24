@@ -4,7 +4,7 @@ import { getProjects } from "./projects";
 import { colors } from "./colors";
 import { Terminal } from "xterm";
 
-export const showAutocomplete = (term: Terminal, partialCommand: string): string => {
+export const showAutocomplete = (term: Terminal, partialCommand: string, updateAutocompleteBuffer: (newBuffer: string) => void) => {
     const [cmd, ...args] = partialCommand.trim().split(/\s+/);
     if (cmd === "projects" && args.length > 0) {
         const projectNamePart = args.join(" ");
@@ -15,9 +15,9 @@ export const showAutocomplete = (term: Terminal, partialCommand: string): string
             const completion = matches[0].substring(projectNamePart.length);
             term.write(`\x1B[38;5;240m${completion}\x1B[0m`);
             term.write("\b".repeat(completion.length));
-            return completion;
+            updateAutocompleteBuffer(completion);
         } else {
-            return "";
+            updateAutocompleteBuffer("");
         }
     } else {
         const commands = getCommands();
@@ -26,18 +26,23 @@ export const showAutocomplete = (term: Terminal, partialCommand: string): string
             const completion = matches[0].substring(partialCommand.length);
             term.write(`\x1B[38;5;240m${completion}\x1B[0m`);
             term.write("\b".repeat(completion.length));
-            return completion;
+            updateAutocompleteBuffer(completion);
         } else {
-            return "";
+            updateAutocompleteBuffer("");
         }
     }
 };
 
-export const clearAutocomplete = (autocompleteBuffer: string, term: ExtendedTerminal, commandBuffer: string): string => {
+export const clearAutocomplete = (
+    autocompleteBuffer: string,
+    term: ExtendedTerminal,
+    commandBuffer: string,
+    updateAutocompleteBuffer: (newBuffer: string) => void
+) => {
     if (autocompleteBuffer.length > 0) {
         term.write("\x1B[2K\r");
         term.write(`${colors.pink}> ${colors.reset}${commandBuffer}`);
-        return "";
+        updateAutocompleteBuffer("");
     }
-    return autocompleteBuffer;
+    updateAutocompleteBuffer(autocompleteBuffer);
 };

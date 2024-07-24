@@ -9,9 +9,10 @@ export function Enter(
     history: string[],
     autocompleteBuffer: string,
     updateCommandBuffer: (newBuffer: string) => void,
+    updateAutocompleteBuffer: (newBuffer: string) => void,
     setHistoryIndex: (index: number) => void
 ) {
-    autocompleteBuffer = clearAutocomplete(autocompleteBuffer, term, commandBuffer)!;
+    autocompleteBuffer = clearAutocomplete(autocompleteBuffer, term, commandBuffer, updateAutocompleteBuffer)!;
     term.write("\r\n");
     if (commandBuffer.trim()) {
         handleCommand(term, commandBuffer);
@@ -29,7 +30,7 @@ export function Backspace(
     updateCommandBuffer: (newBuffer: string) => void,
     updateAutocompleteBuffer: (newBuffer: string) => void
 ) {
-    autocompleteBuffer = clearAutocomplete(autocompleteBuffer, term, commandBuffer)!;
+    autocompleteBuffer = clearAutocomplete(autocompleteBuffer, term, commandBuffer, updateAutocompleteBuffer)!;
     if (commandBuffer.length > 0) {
         commandBuffer = commandBuffer.slice(0, -1);
         term.write("\b \b");
@@ -82,18 +83,4 @@ export function ArrowDown(
         setHistoryIndex(newIndex);
         updateCommandBuffer(newIndex >= 0 ? history[newIndex] : "");
     }
-}
-
-export function printable(
-    term: Terminal,
-    commandBuffer: string,
-    e: { key: string },
-    updateCommandBuffer: (newBuffer: string) => void,
-    updateAutocompleteBuffer: (newBuffer: string) => void
-) {
-    commandBuffer += e.key;
-    term.write(e.key);
-    const newAutocompleteBuffer = showAutocomplete(term, commandBuffer);
-    updateCommandBuffer(commandBuffer);
-    updateAutocompleteBuffer(newAutocompleteBuffer);
 }
