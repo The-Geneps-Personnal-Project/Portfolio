@@ -1,6 +1,6 @@
-import { ExtendedTerminal } from '../types/extendedTerminal';
-import { colors } from './colors';
-import { getProjects } from './projects';
+import { ExtendedTerminal } from "../types/extendedTerminal";
+import { colors } from "./colors";
+import { getProjects } from "./projects";
 
 type CommandFunction = (term: ExtendedTerminal, args?: string[]) => void;
 
@@ -20,24 +20,22 @@ function ls(term: ExtendedTerminal) {
 function cat(term: ExtendedTerminal, args?: string[]) {
     if (args && args.length > 0) {
         const fileName = args[0];
-        if (fileName === 'credentials.txt') {
-            term.writeln('#TODO: Move to a safer place the credentials\n');
-            term.writeln('username: admin');
-            term.writeln('password: 1234');
+        if (fileName === "credentials.txt") {
+            term.writeln("#TODO: Move to a safer place the credentials\n");
+            term.writeln("root password: 1234");
         } else {
             term.writeln(`${colors.red}File not found: ${fileName}${colors.reset}`);
         }
     } else {
-        term.writeln('Please provide a file name');
+        term.writeln("Please provide a file name");
     }
-
 }
 
 function help(term: ExtendedTerminal) {
-    term.writeln('Available commands:');
-    term.writeln('help - Show available commands');
-    term.writeln('projects - List my projects');
-    term.writeln('whoami - Show who I am');
+    term.writeln("Available commands:");
+    term.writeln("help - Show available commands");
+    term.writeln("projects - List my projects");
+    term.writeln("whoami - Show who I am");
 }
 
 function clear(term: ExtendedTerminal) {
@@ -61,15 +59,15 @@ function projects(term: ExtendedTerminal, args?: string[]) {
             term.writeln(`${colors.red}Project not found: ${projectName}${colors.reset}`);
         }
     } else {
-        term.writeln('Please provide a project name. Available projects are:');
+        term.writeln("Please provide a project name. Available projects are:");
         getProjects().forEach(project => term.writeln(`\u25CF ${project.name}`));
     }
 }
 
 export const printHome = (term: ExtendedTerminal, prompt: boolean = false) => {
-    term.writeln('Welcome to my portfolio!');
-    term.writeln('Type help to see available commands');
-    term.writeln('');
+    term.writeln("Welcome to my portfolio!");
+    term.writeln("Type help to see available commands");
+    term.writeln("");
     if (prompt) term.write(`${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
 };
 
@@ -90,22 +88,20 @@ export const handleCommand = (term: ExtendedTerminal, command: string) => {
         projects,
         cd,
         ls,
-        cat
+        cat,
     };
 
     const [cmd, ...args] = command.trim().split(/\s+/);
 
-    term.writeln('');
+    term.writeln("");
 
     if (commands[cmd]) {
         commands[cmd](term, args);
     } else {
         term.writeln(`Command not found: ${cmd}`);
     }
-
-    term.prompt();
 };
 
 export const getCommands = (): string[] => {
-    return ['help', 'projects', 'whoami', 'clear'];
+    return ["help", "projects", "whoami", "clear"];
 };

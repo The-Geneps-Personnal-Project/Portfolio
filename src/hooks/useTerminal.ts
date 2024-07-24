@@ -1,109 +1,95 @@
-import { useCallback } from 'react';
-import { ExtendedTerminal } from '../types/extendedTerminal';
-import { FitAddon } from 'xterm-addon-fit';
-import { WebLinksAddon } from '@xterm/addon-web-links';
-import { SearchAddon } from '@xterm/addon-search';
-import { colors } from '../utils/colors';
-import { printHome, handleCommand, getCommands } from '../utils/commands';
-import { showAutocomplete } from '../utils/autocomplete';
+import { useCallback, useState, useRef } from "react";
+import { ExtendedTerminal } from "../types/extendedTerminal";
+import { FitAddon } from "xterm-addon-fit";
+import { WebLinksAddon } from "@xterm/addon-web-links";
+import { SearchAddon } from "@xterm/addon-search";
+import { colors } from "../utils/colors";
+import { printHome } from "../utils/commands";
+import * as keys from "../utils/keys";
 
 export const useTerminal = () => {
-  const initializeTerminal = useCallback((container: HTMLDivElement) => {
-    const term = new ExtendedTerminal({
-      cursorBlink: true,
-      cursorStyle: 'block',
-      theme: {
-        background: '#1d1f21',
-        foreground: '#c5c8c6',
-      },
-    });
+    const [history, setHistory] = useState<string[]>([]);
+    const historyIndexRef = useRef(-1);
 
-    const fitAddon = new FitAddon();
-    const searchAddon = new SearchAddon();
-    term.loadAddon(fitAddon);
-    term.loadAddon(new WebLinksAddon());
-    term.loadAddon(searchAddon);
-    term.open(container);
-    fitAddon.fit();
+    const initializeTerminal = useCallback(
+        (container: HTMLDivElement) => {
+            const term = new ExtendedTerminal({
+                cursorBlink: true,
+                cursorStyle: "block",
+                theme: {
+                    background: "#1d1f21",
+                    foreground: "#c5c8c6",
+                },
+            });
 
-    const history: string[] = [];
-    let historyIndex = -1;
+            const fitAddon = new FitAddon();
+            const searchAddon = new SearchAddon();
+            term.loadAddon(fitAddon);
+            term.loadAddon(new WebLinksAddon());
+            term.loadAddon(searchAddon);
+            term.open(container);
+            fitAddon.fit();
 
-    window.addEventListener('resize', () => {
-      fitAddon.fit();
-    });
+            window.addEventListener("resize", () => {
+                fitAddon.fit();
+            });
 
-    printHome(term, true);
+            printHome(term, true);
 
-    let commandBuffer = '';
-    let autocompleteBuffer = '';
+            let commandBuffer = "";
+            let autocompleteBuffer = "";
 
-    const clearAutocomplete = () => {
-      if (autocompleteBuffer.length > 0) {
-        term.write('\x1B[2K\r'); // Clear entire line
-        term.write(`${colors.pink}> ${colors.reset}` + commandBuffer); // Rewrite the prompt and command buffer
-        autocompleteBuffer = '';
-      }
-    };
+            const updateCommandBuffer = (newBuffer: string) => {
+                term.write("\x1B[2K\r"); // Clear entire line
+                term.write(`${colors.pink}> ${colors.reset}${newBuffer}`);
+                commandBuffer = newBuffer;
+            };
 
-    const updateCommandBuffer = (newBuffer: string) => {
-      term.write('\x1B[2K\r'); // Clear entire line
-      term.write(`${colors.pink}> ${colors.reset}` + newBuffer); // Rewrite the prompt and command buffer
-      commandBuffer = newBuffer;
-    };
+            const updateAutocompleteBuffer = (newBuffer: string) => {
+                autocompleteBuffer = newBuffer;
+            };
 
-    term.prompt = () => {
-      term.write(`\n${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
-    };
+            const setHistoryIndex = (index: number) => {
+                historyIndexRef.current = index;
+            };
 
-    term.onKey(e => {
-      const ev = e.domEvent;
-      const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
+            term.prompt = () => {
+                term.write(`\n${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
+            };
 
-      if (ev.key === "Enter") {
-        clearAutocomplete();
-        term.write('\r\n'); // Move to the next line
-        if (commandBuffer.trim()) {
-          handleCommand(term, commandBuffer);
-          history.unshift(commandBuffer);
-          historyIndex = -1;
-        }
-        commandBuffer = '';
-      } else if (ev.key === "Backspace") {
-        clearAutocomplete();
-        if (commandBuffer.length > 0) {
-          commandBuffer = commandBuffer.slice(0, -1);
-          term.write('\b \b');
-        }
-      } else if (ev.key === "Tab") {
-        if (autocompleteBuffer.length > 0) {
-          term.write(autocompleteBuffer); // Write the autocomplete buffer in normal color
-          commandBuffer += autocompleteBuffer; // Accept autocomplete
-          autocompleteBuffer = '';
-          ev.preventDefault(); // Prevent default tab behavior
-        }
-      } else if (ev.key === "ArrowUp") {
-        clearAutocomplete();
-        if (history.length > 0) {
-          historyIndex = Math.min(historyIndex + 1, history.length - 1);
-          updateCommandBuffer(history[historyIndex] || '');
-        }
-      } else if (ev.key === "ArrowDown") {
-        clearAutocomplete();
-        if (history.length > 0) {
-          historyIndex = Math.max(historyIndex - 1, -1);
-          updateCommandBuffer(historyIndex >= 0 ? history[historyIndex] : '');
-        }
-      } else if (printable) {
-        clearAutocomplete();
-        commandBuffer += e.key;
-        term.write(e.key);
-        autocompleteBuffer = showAutocomplete(term, commandBuffer);
-      }
-    });
+            term.onKey(e => {
+                const ev = e.domEvent;
+                const printable = !ev.altKey && !ev.ctrlKey && !ev.metaKey;
 
-    return term;
-  }, []);
+                switch (ev.key) {
+                    case "Enter":
+                        keys.Enter(term, commandBuffer, history, autocompleteBuffer, updateCommandBuffer, setHistoryIndex);
+                        setHistory(prev => [commandBuffer, ...prev]);
+                        break;
+                    case "Backspace":
+                        keys.Backspace(term, commandBuffer, autocompleteBuffer, updateCommandBuffer, updateAutocompleteBuffer);
+                        break;
+                    case "Tab":
+                        keys.Tab(term, autocompleteBuffer, commandBuffer, ev, updateCommandBuffer, updateAutocompleteBuffer);
+                        break;
+                    case "ArrowUp":
+                        keys.ArrowUp(term, history, historyIndexRef.current, setHistoryIndex, updateCommandBuffer);
+                        break;
+                    case "ArrowDown":
+                        keys.ArrowDown(term, history, historyIndexRef.current, setHistoryIndex, updateCommandBuffer);
+                        break;
+                    default:
+                        if (printable) {
+                            keys.printable(term, commandBuffer, e, updateCommandBuffer, updateAutocompleteBuffer);
+                        }
+                        break;
+                }
+            });
 
-  return { initializeTerminal };
+            return term;
+        },
+        [history]
+    );
+
+    return { initializeTerminal };
 };
