@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/ZenPortfolio/static/css/main.59ef5af8.css",
+    "main.js": "/ZenPortfolio/static/js/main.d0e68dd5.js",
+    "index.html": "/ZenPortfolio/index.html",
+    "main.59ef5af8.css.map": "/ZenPortfolio/static/css/main.59ef5af8.css.map",
+    "main.d0e68dd5.js.map": "/ZenPortfolio/static/js/main.d0e68dd5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.59ef5af8.css",
+    "static/js/main.d0e68dd5.js"
+  ]
+}
