@@ -54,7 +54,10 @@ function projects(term: ExtendedTerminal, args?: string[]) {
             project.techStack.forEach(stack => {
                 term.writeln(`\t\u25CF ${stack}`);
             });
-            term.writeln(`\n${colors.green}Github:${colors.reset} \u25B6 ${project.github}`);
+            term.writeln(`\n${colors.green}Github:${colors.reset}`)
+            project.github.forEach(page => {
+                term.writeln(`\t\u25B6 ${page}`);
+            })
         } else {
             term.writeln(`${colors.red}Project not found: ${projectName}${colors.reset}`);
         }
@@ -66,7 +69,7 @@ function projects(term: ExtendedTerminal, args?: string[]) {
 
 export const printHome = (term: ExtendedTerminal, prompt: boolean = false) => {
     term.writeln("Welcome to my portfolio!");
-    term.writeln("Type help to see available commands");
+    term.writeln(`Type ${colors.blue}\'help\'${colors.reset} to see available commands`);
     term.writeln("");
     if (prompt) term.write(`${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
 };

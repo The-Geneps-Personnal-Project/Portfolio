@@ -14,7 +14,6 @@
     width: 85%;
     height: 85%;
     border: 2px solid #444;
-    border-radius: 10px;
     background-color: #1d1f21;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -27,6 +26,7 @@
     color: #c5c8c6;
     overflow: hidden;
     text-align: left;
+    padding: 1vh;
 }
 
 ::-webkit-scrollbar {
