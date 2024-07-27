@@ -2,13 +2,12 @@ import { ExtendedTerminal } from "../types/extendedTerminal";
 import { getCommands } from "./commands";
 import { getProjects } from "./projects";
 import { colors } from "./colors";
-import { Terminal } from "xterm";
 
-export const showAutocomplete = (term: Terminal, partialCommand: string, updateAutocompleteBuffer: (newBuffer: string) => void) => {
+export const showAutocomplete = (term: ExtendedTerminal, partialCommand: string, updateAutocompleteBuffer: (newBuffer: string) => void) => {
     const [cmd, ...args] = partialCommand.trim().split(/\s+/);
     if (cmd === "projects" && args.length > 0) {
         const projectNamePart = args.join(" ");
-        const matches = getProjects()
+        const matches = getProjects(term)
             .map(p => p.name)
             .filter(name => name.toLowerCase().startsWith(projectNamePart.toLowerCase()));
         if (matches.length === 1) {

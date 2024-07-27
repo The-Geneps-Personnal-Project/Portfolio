@@ -1,9 +1,11 @@
-export function getProjects() {
+import { useTranslation } from "react-i18next";
+import { ExtendedTerminal } from "../types/extendedTerminal";
+
+export function getProjects(term: ExtendedTerminal) {
     return [
         {
             name: "ScrapTS",
-            description:
-                "A web scraper built with TypeScript and Puppeteer. It allows everyday to scraps new chapters of webtoons/manga/manhwa ... depending on a given list of names.",
+            description: `${term.translate("projects.scrap")}`,
             techStack: ["Puppeteer", "TypeScript", "Sqlite3", "Express", "DiscordJS"],
             github: [
                 "https://github.com/The-Geneps-Personnal-Project/ScrapBot",
@@ -12,21 +14,19 @@ export function getProjects() {
         },
         {
             name: "ZenScript",
-            description: "A simple scripting language interpreter built with TypeScript. It allows to run scripts written in ZenScript.",
+            description: `${term.translate("projects.zenscript")}`,
             techStack: ["TypeScript"],
             github: ["https://github.com/The-Geneps-Personnal-Project/ZenScript"],
         },
         {
             name: "Portfolio",
-            description:
-                "My portfolio website built with React. It is a terminal emulator that displays information about me and my projects.",
+            description: `${term.translate("projects.portfolio")}`,
             techStack: ["React", "TypeScript"],
-            github: [""],
+            github: ["https://github.com/The-Geneps-Personnal-Project/ZenPortfolio"],
         },
         {
             name: "EpiHunt",
-            description:
-                "A discord bot made for the school Epitech that allows user to participage in a large scale game of QR code hunting containing enigmas.",
+            description: `${term.translate("projects.epihunt")}`,
             techStack: ["DiscordJS", "TypeScript"],
             github: ["https://github.com/The-Geneps-Personnal-Project/EpiHunt"],
         },

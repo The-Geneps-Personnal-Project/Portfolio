@@ -1,0 +1,42 @@
+{
+    "welcome": {
+        "home": "Bienvenue sur mon portfolio !",
+        "help": "Tapez '{{blue}}help{{reset}}' pour voir les commandes disponibles"
+    },
+    "commands": {
+        "notfound": "Commande introuvable: {{0}}",
+        "cd": "{{red}}Comment osez vous quitter cet endroit{{reset}}",
+        "cat": {
+            "error": "cat: {{0}}: Ce fichier n'existe pas",
+            "success": "#TODO: Déplacer les identifiants dans un endroit plus approprié",
+            "password": "root password: 1234",
+            "unnamed": "Veuillez indiquer un nom de fichier"
+        },
+        "help": {
+            "description": "Liste des commandes disponibles",
+            "help": "help - Liste les commanedes disponibles ",
+            "projects": "projects - List tous les projets",
+            "proj": "projects [nom] - Affiche les informations liés au projet",
+            "whoami": "whoami - Pour en savoir plus sur moi",
+            "lang": "lang - Change la langue d'affichage"
+        },
+        "projects": {
+            "error": "Merci d'indiquer un nom de projet. Les projets disponibles sont:",
+            "name": "\n{{green}}Nom du projet:{{reset}} {{0}}"
+        },
+        "whoami": {
+            "name": "Nom: Antoine Dabin",
+            "position": "Occupation: Backend Developer"
+        },
+        "lang": {
+            "notfound": "'{{0}}' n'est pas supporté. Les langues disponibles sont 'fr' et 'en'",
+            "error": "Veuillez indiquer un langage"
+        }
+    },
+    "projects": {
+        "scrap": "Un scraper web réalisé en TypeScript avec Puppeteer. Il permet de récupérer quotidiennement les nouveaux chapitres de manga/webtoon/manhwa ...",
+        "zenscript": "Un interpréteur de langage de script simple construit avec TypeScript. Il permet d'exécuter des scripts écrits en ZenScript.",
+        "portfolio": "Mon portfolio réalise en React avec xterm.js. C'est un simulateur de terminal permettant d'obtenir des informations sur mes projets et moi même",
+        "EpiHunt": "Un bot discord réalise pour l'école Epitech qui permet aux utilisateurs de participer à un jeu de grande ampleur consistant a des énigmes cachés derrière des QR code"
+    }
+}

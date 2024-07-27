@@ -1,0 +1,43 @@
+{
+    "welcome": {
+        "home": "Welcome to my portfolio !",
+        "help": "Type '{{blue}}help{{reset}}' to see available commands"
+    },
+    "commands": {
+        "notfound": "Command not found: {{0}}",
+        "cd": "{{red}}How dare you leave the place{{reset}}",
+        "cat": {
+            "error": "cat: {{0}}: No such file or directory",
+            "success": "#TODO: Move the credentials to a secure place",
+            "password": "Mot de passe root: 1234",
+            "unnamed": "Please provide a file name"
+        },
+        "help": {
+            "description": "List all available commands",
+            "help": "help - Show available commands",
+            "projects": "projects - List all projects",
+            "proj": "projects [name] - Display given project informations",
+            "whoami": "whoami - Display user informations",
+            "lang": "lang - Change display language"
+        },
+        "projects": {
+            "error": "Please provide a project name. Available projects are:",
+            "notfound": "{{red}}Project not found: {{0}}{{reset}}",
+            "name": "\n{{green}}Project Name:{{reset}} {{0}}"
+        },
+        "whoami": {
+            "name": "Name: Antoine Dabin",
+            "position": "Position: Backend Developer"
+        },
+        "lang": {
+            "notfound":"'{{0}}' is not supported: Available languagues are 'fr' and 'en'",
+            "error": "Please provide a language"
+        }
+    },
+    "projects": {
+        "scrap": "A web scraper built with TypeScript and Puppeteer. It allows everyday to scraps new chapters of webtoons/manga/manhwa ... depending on a given list of names.",
+        "zenscript": "A simple scripting language interpreter built with TypeScript. It allows to run scripts written in ZenScript.",
+        "portfolio": "My portfolio website built with React. It is a terminal emulator that displays information about me and my projects.",
+        "epihunt": "A discord bot made for the school Epitech that allows user to participage in a large scale game of QR code hunting containing enigmas."
+    }
+}
