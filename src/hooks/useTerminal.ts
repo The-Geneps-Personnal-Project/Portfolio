@@ -13,7 +13,7 @@ export const useTerminal = () => {
     const [history, setHistory] = useState<string[]>([]);
     const historyIndexRef = useRef(-1);
 
-    const {t} = useTranslation()
+    const { t } = useTranslation();
 
     const initializeTerminal = useCallback(
         (container: HTMLDivElement) => {

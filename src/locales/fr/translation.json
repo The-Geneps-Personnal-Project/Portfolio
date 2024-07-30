@@ -31,6 +31,9 @@
         "lang": {
             "notfound": "'{{0}}' n'est pas supporté. Les langues disponibles sont 'fr' et 'en'",
             "error": "Veuillez indiquer un langage"
+        },
+        "sudo": {
+            "prompt": "[sudo] Mot de passe: "
         }
     },
     "projects": {

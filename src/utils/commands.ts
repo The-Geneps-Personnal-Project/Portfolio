@@ -23,9 +23,9 @@ function cat(term: ExtendedTerminal, args?: string[]) {
         const fileName = args[0];
         if (fileName === "credentials.txt") {
             term.writeln(term.translate("commands.cat.success"));
-            term.writeln(term.translate("commands.cat.password"))
+            term.writeln(term.translate("commands.cat.password"));
         } else {
-            term.writeln(term.translate("commands.cat.error", {0: fileName}));
+            term.writeln(term.translate("commands.cat.error", { 0: fileName }));
         }
     } else {
         term.writeln(term.translate("commands.cat.unnamed"));
@@ -36,9 +36,9 @@ function help(term: ExtendedTerminal) {
     term.writeln(term.translate("commands.help.description"));
     term.writeln(term.translate("commands.help.help"));
     term.writeln(term.translate("commands.help.projects"));
-    term.writeln(term.translate("commands.help.proj"))
+    term.writeln(term.translate("commands.help.proj"));
     term.writeln(term.translate("commands.help.whoami"));
-    term.writeln(term.translate("commands.help.lang"))
+    term.writeln(term.translate("commands.help.lang"));
 }
 
 function clear(term: ExtendedTerminal) {
@@ -51,18 +51,18 @@ function projects(term: ExtendedTerminal, args?: string[]) {
         const projectName = args[0];
         const project = getProjects(term).find(p => p.name.toLowerCase() === projectName.toLowerCase());
         if (project) {
-            term.writeln(replaceColors(term.translate("commands.projects.name", {0: project.name})));
+            term.writeln(replaceColors(term.translate("commands.projects.name", { 0: project.name })));
             term.writeln(`${colors.green}Description:${colors.reset} ${project.description}`);
             term.writeln(`\n${colors.green}Tech Stack:${colors.reset}`);
             project.techStack.forEach(stack => {
                 term.writeln(`\t\u25CF ${stack}`);
             });
-            term.writeln(`\n${colors.green}Github:${colors.reset}`)
+            term.writeln(`\n${colors.green}Github:${colors.reset}`);
             project.github.forEach(page => {
                 term.writeln(`\t\u25B6 ${page}`);
-            })
+            });
         } else {
-            term.writeln(replaceColors(term.translate("commands.projetcs.notfound", {0: projectName})));
+            term.writeln(replaceColors(term.translate("commands.projetcs.notfound", { 0: projectName })));
         }
     } else {
         term.writeln(term.translate("commands.projects.error"));
@@ -70,7 +70,28 @@ function projects(term: ExtendedTerminal, args?: string[]) {
     }
 }
 
+const printAscii = (term: ExtendedTerminal) => {
+    if (term.isLanguage("en")) {
+        term.writeln("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗");
+        term.writeln("██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝");
+        term.writeln("██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  ");
+        term.writeln("██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  ");
+        term.writeln("╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗");
+        term.writeln(" ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝");
+        term.writeln("                                                              ");
+    } else {
+        term.writeln("██████╗ ██╗███████╗███╗   ██╗██╗   ██╗███████╗███╗   ██╗██╗   ██╗███████╗");
+        term.writeln("██╔══██╗██║██╔════╝████╗  ██║██║   ██║██╔════╝████╗  ██║██║   ██║██╔════╝");
+        term.writeln("██████╔╝██║█████╗  ██╔██╗ ██║██║   ██║█████╗  ██╔██╗ ██║██║   ██║█████╗  ");
+        term.writeln("██╔══██╗██║██╔══╝  ██║╚██╗██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║██║   ██║██╔══╝  ");
+        term.writeln("██████╔╝██║███████╗██║ ╚████║ ╚████╔╝ ███████╗██║ ╚████║╚██████╔╝███████╗");
+        term.writeln("╚═════╝ ╚═╝╚══════╝╚═╝  ╚═══╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝");
+        term.writeln("                                                                         ");
+    }
+};
+
 export const printHome = (term: ExtendedTerminal, prompt: boolean = false) => {
+    printAscii(term);
     term.writeln(term.translate("welcome.home"));
     term.writeln(replaceColors(term.translate("welcome.help")));
     term.writeln("");
@@ -87,10 +108,17 @@ const whoami = (term: ExtendedTerminal) => {
 };
 
 const lang = (term: ExtendedTerminal, args?: string[]) => {
-    if (args?.length === 0) term.writeln(term.translate("commands.lang.error"))
-    else if (!["fr", "en"].includes(args![0])) term.writeln(term.translate("commands.lang.notfound", {0: args![0]}))
-    else {i18n.changeLanguage(args![0]); clear(term)}
-}
+    if (args?.length === 0) term.writeln(term.translate("commands.lang.error"));
+    else if (!["fr", "en"].includes(args![0])) term.writeln(term.translate("commands.lang.notfound", { 0: args![0] }));
+    else {
+        i18n.changeLanguage(args![0]);
+        clear(term);
+    }
+};
+
+const sudo = (term: ExtendedTerminal) => {
+    term.write(term.translate("commands.sudo.prompt"));
+};
 
 export const handleCommand = (term: ExtendedTerminal, command: string) => {
     const commands: { [key: string]: CommandFunction } = {
@@ -101,7 +129,8 @@ export const handleCommand = (term: ExtendedTerminal, command: string) => {
         cd,
         ls,
         cat,
-        lang
+        lang,
+        sudo,
     };
 
     const [cmd, ...args] = command.trim().split(/\s+/);
@@ -111,7 +140,7 @@ export const handleCommand = (term: ExtendedTerminal, command: string) => {
     if (commands[cmd]) {
         commands[cmd](term, args);
     } else {
-        term.writeln(term.translate("commands.notfound", {0: cmd}));
+        term.writeln(term.translate("commands.notfound", { 0: cmd }));
     }
 };
 

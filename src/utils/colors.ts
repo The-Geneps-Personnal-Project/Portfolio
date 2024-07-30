@@ -6,11 +6,11 @@ export const colors = {
     pink: "\x1B[1;3;35m",
 };
 
-export function replaceColors(text:string) {
+export function replaceColors(text: string) {
     return text
-        .replace('{{red}}', colors.red)
-        .replace('{{green}}', colors.green)
-        .replace('{{blue}}', colors.blue)
-        .replace('{{reset}}', colors.reset)
-        .replace('{{pink}}', colors.pink);
+        .replace("{{red}}", colors.red)
+        .replace("{{green}}", colors.green)
+        .replace("{{blue}}", colors.blue)
+        .replace("{{reset}}", colors.reset)
+        .replace("{{pink}}", colors.pink);
 }

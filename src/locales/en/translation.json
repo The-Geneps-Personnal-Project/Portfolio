@@ -30,8 +30,11 @@
             "position": "Position: Backend Developer"
         },
         "lang": {
-            "notfound":"'{{0}}' is not supported: Available languagues are 'fr' and 'en'",
+            "notfound": "'{{0}}' is not supported: Available languagues are 'fr' and 'en'",
             "error": "Please provide a language"
+        },
+        "sudo": {
+            "prompt": "[sudo] Password: "
         }
     },
     "projects": {
