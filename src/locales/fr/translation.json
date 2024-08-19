@@ -41,5 +41,25 @@
         "zenscript": "Un interpréteur de langage de script simple construit avec TypeScript. Il permet d'exécuter des scripts écrits en ZenScript.",
         "portfolio": "Mon portfolio réalise en React avec xterm.js. C'est un simulateur de terminal permettant d'obtenir des informations sur mes projets et moi même",
         "EpiHunt": "Un bot discord réalise pour l'école Epitech qui permet aux utilisateurs de participer à un jeu de grande ampleur consistant a des énigmes cachés derrière des QR code"
+    },
+    "help": {
+        "help": "Aide",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "show": "Afficher Aide",
+        "hide": "Cacher Aide",
+        "text": {
+            "commandUsage": {
+                "instruction": "Comment utiliser les commandes",
+                "description": "Tapez le nom de la commande que vous souhaitez exécuter. Au fur et à mesure que vous tapez, du texte gris peut apparaître—c'est la suggestion de saisie semi-automatique. Pour accepter la commande suggérée, appuyez sur la touche <strong>Tab</strong>. Une fois la commande complète, appuyez sur <strong>Entrée</strong> pour l'exécuter.",
+                "example": {
+                    "step1": "Commencez à taper votre commande : <strong>he</strong>",
+                    "step2": "Appuyez sur <strong>Tab</strong> pour la saisie semi-automatique : <strong>help</strong>",
+                    "step3": "Appuyez sur <strong>Entrée</strong> pour exécuter la commande."
+                }
+            },
+            "help2": "Aide 2",
+            "help3": "Aide 3"
+        }
     }
 }

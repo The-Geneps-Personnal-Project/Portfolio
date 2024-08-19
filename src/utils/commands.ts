@@ -145,5 +145,5 @@ export const handleCommand = (term: ExtendedTerminal, command: string) => {
 };
 
 export const getCommands = (): string[] => {
-    return ["help", "projects", "whoami", "clear"];
+    return ["help", "projects", "whoami", "clear", "lang"];
 };

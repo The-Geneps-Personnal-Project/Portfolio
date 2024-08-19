@@ -12,9 +12,11 @@ const resources = {
     },
 };
 
+const userLanguage = navigator.language.startsWith('fr') ? 'fr' : 'en';
+
 i18n.use(initReactI18next).init({
     resources,
-    lng: "en",
+    lng: userLanguage,
     fallbackLng: "en",
     interpolation: {
         escapeValue: false,
