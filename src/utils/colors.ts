@@ -8,9 +8,9 @@ export const colors = {
 
 export function replaceColors(text: string) {
     return text
-        .replace("{{red}}", colors.red)
-        .replace("{{green}}", colors.green)
-        .replace("{{blue}}", colors.blue)
-        .replace("{{reset}}", colors.reset)
-        .replace("{{pink}}", colors.pink);
+        .replaceAll("{{red}}", colors.red)
+        .replaceAll("{{green}}", colors.green)
+        .replaceAll("{{blue}}", colors.blue)
+        .replaceAll("{{reset}}", colors.reset)
+        .replaceAll("{{pink}}", colors.pink);
 }

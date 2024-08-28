@@ -1,0 +1,27 @@
+.command-usage-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.command-usage-content h4 {
+    margin-bottom: 15px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.command-usage-content .description {
+    margin-bottom: 15px;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.example-steps p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+.media-content {
+    max-width: 70%;
+    margin-bottom: 20px;
+}
