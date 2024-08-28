@@ -58,7 +58,7 @@ export const useTerminal = () => {
             };
 
             term.prompt = () => {
-                term.write(`\n${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
+                term.write(`\n${colors.blue}${term.getPath()}${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
             };
 
             term.onKey(e => {

@@ -8,8 +8,8 @@ const HelpWindow: React.FC = () => {
     const [slideIndex, setSlideIndex] = useState(0);
     const [size, setSize] = useState({ width: 0, height: 0 });
     const [position, setPosition] = useState({ x: 0, y: 0 });
-    const isDragging = useRef(false);
-    const isResizing = useRef(false);
+    // const isDragging = useRef(false);
+    // const isResizing = useRef(false);
     const { t, i18n } = useTranslation();
 
     const windowRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ const HelpWindow: React.FC = () => {
             });
         };
 
-        window.addEventListener('resize', handleResize);
+        // window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, [size.width, size.height, position.x, position.y]);
 
@@ -59,73 +59,73 @@ const HelpWindow: React.FC = () => {
         i18n.changeLanguage(lng);
     };
 
-    const startDrag = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (isResizing.current) return;
+    // const startDrag = (e: React.MouseEvent<HTMLDivElement>) => {
+    //     if (isResizing.current) return;
 
-        e.preventDefault();
-        isDragging.current = true;
+    //     e.preventDefault();
+    //     isDragging.current = true;
 
-        const startX = e.clientX;
-        const startY = e.clientY;
-        const initialX = position.x;
-        const initialY = position.y;
+    //     const startX = e.clientX;
+    //     const startY = e.clientY;
+    //     const initialX = position.x;
+    //     const initialY = position.y;
 
-        const onDrag = (e: MouseEvent) => {
-            if (!isDragging.current) return;
+    //     const onDrag = (e: MouseEvent) => {
+    //         if (!isDragging.current) return;
 
-            setPosition({
-                x: initialX + (e.clientX - startX),
-                y: initialY + (e.clientY - startY),
-            });
-        };
+    //         setPosition({
+    //             x: initialX + (e.clientX - startX),
+    //             y: initialY + (e.clientY - startY),
+    //         });
+    //     };
 
-        const stopDrag = () => {
-            isDragging.current = false;
-            document.removeEventListener('mousemove', onDrag);
-            document.removeEventListener('mouseup', stopDrag);
-        };
+    //     const stopDrag = () => {
+    //         isDragging.current = false;
+    //         document.removeEventListener('mousemove', onDrag);
+    //         document.removeEventListener('mouseup', stopDrag);
+    //     };
 
-        document.addEventListener('mousemove', onDrag);
-        document.addEventListener('mouseup', stopDrag);
-    };
+    //     document.addEventListener('mousemove', onDrag);
+    //     document.addEventListener('mouseup', stopDrag);
+    // };
 
-    const startResize = (e: React.MouseEvent<HTMLDivElement>, direction: 'right' | 'bottom' | 'corner') => {
-        e.preventDefault();
-        isResizing.current = true;
+    // const startResize = (e: React.MouseEvent<HTMLDivElement>, direction: 'right' | 'bottom' | 'corner') => {
+    //     e.preventDefault();
+    //     isResizing.current = true;
 
-        const startX = e.clientX;
-        const startY = e.clientY;
-        const initialWidth = size.width;
-        const initialHeight = size.height;
+    //     const startX = e.clientX;
+    //     const startY = e.clientY;
+    //     const initialWidth = size.width;
+    //     const initialHeight = size.height;
 
-        const onResize = (e: MouseEvent) => {
-            if (!isResizing.current) return;
+    //     const onResize = (e: MouseEvent) => {
+    //         if (!isResizing.current) return;
 
-            let newWidth = initialWidth;
-            let newHeight = initialHeight;
+    //         let newWidth = initialWidth;
+    //         let newHeight = initialHeight;
 
-            if (direction === 'right' || direction === 'corner') {
-                newWidth = Math.max(initialWidth + (e.clientX - startX), window.innerWidth * 0.1);
-            }
-            if (direction === 'bottom' || direction === 'corner') {
-                newHeight = Math.max(initialHeight + (e.clientY - startY), window.innerHeight * 0.1);
-            }
+    //         if (direction === 'right' || direction === 'corner') {
+    //             newWidth = Math.max(initialWidth + (e.clientX - startX), window.innerWidth * 0.1);
+    //         }
+    //         if (direction === 'bottom' || direction === 'corner') {
+    //             newHeight = Math.max(initialHeight + (e.clientY - startY), window.innerHeight * 0.1);
+    //         }
 
-            setSize({
-                width: newWidth,
-                height: newHeight,
-            });
-        };
+    //         setSize({
+    //             width: newWidth,
+    //             height: newHeight,
+    //         });
+    //     };
 
-        const stopResize = () => {
-            isResizing.current = false;
-            document.removeEventListener('mousemove', onResize);
-            document.removeEventListener('mouseup', stopResize);
-        };
+    //     const stopResize = () => {
+    //         isResizing.current = false;
+    //         document.removeEventListener('mousemove', onResize);
+    //         document.removeEventListener('mouseup', stopResize);
+    //     };
 
-        document.addEventListener('mousemove', onResize);
-        document.addEventListener('mouseup', stopResize);
-    };
+    //     document.addEventListener('mousemove', onResize);
+    //     document.addEventListener('mouseup', stopResize);
+    // };
 
     return (
         <>
@@ -136,7 +136,7 @@ const HelpWindow: React.FC = () => {
                 <div
                     className="help-window"
                     ref={windowRef}
-                    onMouseDown={startDrag}
+                    // onMouseDown={startDrag}
                     style={{
                         width: `${size.width}px`,
                         height: `${size.height}px`,
@@ -168,7 +168,7 @@ const HelpWindow: React.FC = () => {
                             {slides[slideIndex].content}
                         </div>
                     </div>
-                    <div
+                    {/* <div
                         className="resize-handle resize-handle-right"
                         onMouseDown={(e) => startResize(e, 'right')}
                     />
@@ -179,7 +179,7 @@ const HelpWindow: React.FC = () => {
                     <div
                         className="resize-handle resize-handle-corner"
                         onMouseDown={(e) => startResize(e, 'corner')}
-                    />
+                    /> */}
                 </div>
             )}
         </>

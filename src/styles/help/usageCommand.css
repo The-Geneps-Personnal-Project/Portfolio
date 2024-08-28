@@ -25,3 +25,40 @@
     max-width: 70%;
     margin-bottom: 20px;
 }
+
+/* Uncomment these styles if you decide to bring back the drag and resize functionality */
+
+/* .help-window {
+    position: absolute;
+    z-index: 1000;
+    cursor: move;
+}
+
+.resize-handle {
+    position: absolute;
+    background: transparent;
+}
+
+.resize-handle-right {
+    width: 10px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    cursor: ew-resize;
+}
+
+.resize-handle-bottom {
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+    left: 0;
+    cursor: ns-resize;
+}
+
+.resize-handle-corner {
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
+} */

@@ -5,11 +5,12 @@
     },
     "commands": {
         "notfound": "Command not found: {{0}}",
-        "cd": "{{red}}How dare you leave the place{{reset}}",
+        "cd": "{{red}}You have nowhere to run{{reset}}",
+        "permissions": "{{0}}: Permission denied",
         "cat": {
             "error": "cat: {{0}}: No such file or directory",
             "success": "#TODO: Move the credentials to a secure place",
-            "password": "Mot de passe root: 1234",
+            "password": "root password: admin, you can use sudo -p admin to change user",
             "unnamed": "Please provide a file name"
         },
         "help": {
@@ -34,9 +35,13 @@
             "error": "Please provide a language"
         },
         "sudo": {
-            "prompt": "[sudo] Password: "
+            "wrongPassword": "Wrong password",
+            "error": "Missing arguments"
+        },
+        "killer": {
+            "broke": "Well... You broke it. Good job."
         }
-    },
+    },  
     "projects": {
         "scrap": "A web scraper built with TypeScript and Puppeteer. It allows everyday to scraps new chapters of webtoons/manga/manhwa ... depending on a given list of names.",
         "zenscript": "A simple scripting language interpreter built with TypeScript. It allows to run scripts written in ZenScript.",

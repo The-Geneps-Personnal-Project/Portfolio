@@ -1,15 +1,16 @@
 {
     "welcome": {
         "home": "Bienvenue sur mon portfolio !",
-        "help": "Tapez '{{blue}}help{{reset}}' pour voir les commandes disponibles"
+        "help": "Tapez '{{blue}}help{{reset}}' pour voir les commandes disponibles ou '{{blue}}lang [en/fr]{{reset}}' pour changer la langue d'affichage"
     },
     "commands": {
         "notfound": "Commande introuvable: {{0}}",
-        "cd": "{{red}}Comment osez vous quitter cet endroit{{reset}}",
+        "cd": "{{red}}Vous n'avez nul part où fuir{{reset}}",
+        "permissions": "{{0}}: Permission refusée",
         "cat": {
             "error": "cat: {{0}}: Ce fichier n'existe pas",
             "success": "#TODO: Déplacer les identifiants dans un endroit plus approprié",
-            "password": "root password: 1234",
+            "password": "mot de passe root: admin, vous pouvez utiliser sudo -p admin pour changer d'utilisateur",
             "unnamed": "Veuillez indiquer un nom de fichier"
         },
         "help": {
@@ -33,7 +34,11 @@
             "error": "Veuillez indiquer un langage"
         },
         "sudo": {
-            "prompt": "[sudo] Mot de passe: "
+            "wrongPassword": "Mot de passe incorrect",
+            "error": "Arguments manquants"
+        },
+        "killer": {
+            "broke": "Bien joué, vous avez tout cassé."
         }
     },
     "projects": {
