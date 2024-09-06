@@ -5,3 +5,12 @@ export const colors = {
     reset: "\x1B[0m",
     pink: "\x1B[1;3;35m",
 };
+
+export function replaceColors(text: string) {
+    return text
+        .replaceAll("{{red}}", colors.red)
+        .replaceAll("{{green}}", colors.green)
+        .replaceAll("{{blue}}", colors.blue)
+        .replaceAll("{{reset}}", colors.reset)
+        .replaceAll("{{pink}}", colors.pink);
+}

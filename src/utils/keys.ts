@@ -1,7 +1,6 @@
 import { ExtendedTerminal } from "../types/extendedTerminal";
 import { handleCommand } from "./commands";
-import { clearAutocomplete, showAutocomplete } from "./autocomplete";
-import { Terminal } from "xterm";
+import { clearAutocomplete } from "./autocomplete";
 
 export function Enter(
     term: ExtendedTerminal,

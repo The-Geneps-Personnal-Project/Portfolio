@@ -32,3 +32,36 @@
 ::-webkit-scrollbar {
     width: 0px;
 }
+
+.terminal-character {
+    display: inline-block;
+    position: relative;
+    transition: transform 1s linear;
+}
+
+.message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #c5c8c6;
+    font-size: 2rem;
+    text-align: center;
+    z-index: 100;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(100vh - 100%)) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+.fall {
+    display: inline-block;
+    animation: fall 2s forwards;
+}

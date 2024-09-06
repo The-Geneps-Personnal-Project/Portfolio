@@ -1,0 +1,70 @@
+{
+    "welcome": {
+        "home": "Bienvenue sur mon portfolio !",
+        "help": "Tapez '{{blue}}help{{reset}}' pour voir les commandes disponibles ou '{{blue}}lang [en/fr]{{reset}}' pour changer la langue d'affichage"
+    },
+    "commands": {
+        "notfound": "Commande introuvable: {{0}}",
+        "cd": "{{red}}Vous n'avez nul part où fuir{{reset}}",
+        "permissions": "{{0}}: Permission refusée",
+        "cat": {
+            "error": "cat: {{0}}: Ce fichier n'existe pas",
+            "success": "#TODO: Déplacer les identifiants dans un endroit plus approprié",
+            "password": "mot de passe root: admin, vous pouvez utiliser sudo -p admin pour changer d'utilisateur",
+            "unnamed": "Veuillez indiquer un nom de fichier"
+        },
+        "help": {
+            "description": "Liste des commandes disponibles",
+            "help": "help - Liste les commanedes disponibles ",
+            "projects": "projects - List tous les projets",
+            "proj": "projects [nom] - Affiche les informations liés au projet",
+            "whoami": "whoami - Pour en savoir plus sur moi",
+            "lang": "lang - Change la langue d'affichage"
+        },
+        "projects": {
+            "error": "Merci d'indiquer un nom de projet. Les projets disponibles sont:",
+            "name": "\n{{green}}Nom du projet:{{reset}} {{0}}"
+        },
+        "whoami": {
+            "name": "Nom: Antoine Dabin",
+            "position": "Occupation: Backend Developer"
+        },
+        "lang": {
+            "notfound": "'{{0}}' n'est pas supporté. Les langues disponibles sont 'fr' et 'en'",
+            "error": "Veuillez indiquer un langage"
+        },
+        "sudo": {
+            "wrongPassword": "Mot de passe incorrect",
+            "error": "Arguments manquants"
+        },
+        "killer": {
+            "broke": "Bien joué, vous avez tout cassé."
+        }
+    },
+    "projects": {
+        "scrap": "Un scraper web réalisé en TypeScript avec Puppeteer. Il permet de récupérer quotidiennement les nouveaux chapitres de manga/webtoon/manhwa ...",
+        "zenscript": "Un interpréteur de langage de script simple construit avec TypeScript. Il permet d'exécuter des scripts écrits en ZenScript.",
+        "portfolio": "Mon portfolio réalise en React avec xterm.js. C'est un simulateur de terminal permettant d'obtenir des informations sur mes projets et moi même",
+        "EpiHunt": "Un bot discord réalise pour l'école Epitech qui permet aux utilisateurs de participer à un jeu de grande ampleur consistant a des énigmes cachés derrière des QR code"
+    },
+    "help": {
+        "help": "Aide",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "show": "Afficher Aide",
+        "hide": "Cacher Aide",
+        "text": {
+            "commandUsage": {
+                "instruction": "Comment utiliser les commandes",
+                "description": "Tapez le nom de la commande que vous souhaitez exécuter. Au fur et à mesure que vous tapez, du texte gris peut apparaître—c'est la suggestion de saisie semi-automatique. Pour accepter la commande suggérée, appuyez sur la touche <strong>Tab</strong>. Une fois la commande complète, appuyez sur <strong>Entrée</strong> pour l'exécuter.",
+                "example": {
+                    "step1": "Commencez à taper votre commande : <strong>he</strong>",
+                    "step2": "Appuyez sur <strong>Tab</strong> pour la saisie semi-automatique : <strong>help</strong>",
+                    "step3": "Appuyez sur <strong>Entrée</strong> pour exécuter la commande."
+                }
+            },
+            "help2": "Aide 2",
+            "help3": "Aide 3"
+        }
+    }
+}

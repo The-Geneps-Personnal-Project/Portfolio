@@ -7,14 +7,17 @@ import { colors } from "../utils/colors";
 import { printHome } from "../utils/commands";
 import * as keys from "../utils/keys";
 import { showAutocomplete } from "../utils/autocomplete";
+import { useTranslation } from "react-i18next";
 
 export const useTerminal = () => {
     const [history, setHistory] = useState<string[]>([]);
     const historyIndexRef = useRef(-1);
 
+    const { t } = useTranslation();
+
     const initializeTerminal = useCallback(
         (container: HTMLDivElement) => {
-            const term = new ExtendedTerminal({
+            const term = new ExtendedTerminal(t, {
                 cursorBlink: true,
                 cursorStyle: "block",
                 theme: {
@@ -55,7 +58,7 @@ export const useTerminal = () => {
             };
 
             term.prompt = () => {
-                term.write(`\n${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
+                term.write(`\n${colors.blue}${term.getPath()}${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
             };
 
             term.onKey(e => {

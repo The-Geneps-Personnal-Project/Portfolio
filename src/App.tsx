@@ -1,5 +1,6 @@
 import React from "react";
 import TerminalComponent from "./components/terminal";
+import HelpWindow from "./components/helpWIndow";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -8,6 +9,7 @@ const App: React.FC = () => {
             <header className="App-header">
                 <TerminalComponent />
             </header>
+            <HelpWindow />
         </div>
     );
 };
