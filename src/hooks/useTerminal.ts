@@ -13,6 +13,7 @@ export const useTerminal = () => {
     const [history, setHistory] = useState<string[]>([]);
     const historyIndexRef = useRef(-1);
 
+    // eslint-disable-next-line
     const { t } = useTranslation();
 
     const initializeTerminal = useCallback(
@@ -102,7 +103,7 @@ export const useTerminal = () => {
 
             return term;
         },
-        [history]
+        [history, t]
     );
 
     return { initializeTerminal };

@@ -77,6 +77,7 @@ function projects(term: ExtendedTerminal, args?: string[]) {
 }
 
 const printAscii = (term: ExtendedTerminal) => {
+    if (window.innerWidth < 680) return;
     if (term.isLanguage("en")) {
         term.writeln("██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗");
         term.writeln("██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝");
