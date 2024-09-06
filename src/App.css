@@ -1,0 +1,67 @@
+.App {
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282c34;
+}
+
+.App-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height: 85%;
+    border: 2px solid #444;
+    background-color: #1d1f21;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.TerminalContainer {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #1d1f21;
+    color: #c5c8c6;
+    overflow: hidden;
+    text-align: left;
+    padding: 1vh;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.terminal-character {
+    display: inline-block;
+    position: relative;
+    transition: transform 1s linear;
+}
+
+.message-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #c5c8c6;
+    font-size: 2rem;
+    text-align: center;
+    z-index: 100;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(100vh - 100%)) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+.fall {
+    display: inline-block;
+    animation: fall 2s forwards;
+}

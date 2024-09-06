@@ -1,0 +1,69 @@
+{
+    "welcome": {
+        "home": "Welcome to my portfolio !",
+        "help": "Type '{{blue}}help{{reset}}' to see available commands or '{{blue}}lang [en/fr]{{reset}}' to change the display language"
+    },
+    "commands": {
+        "notfound": "Command not found: {{0}}",
+        "cd": "{{red}}You have nowhere to run{{reset}}",
+        "permissions": "{{0}}: Permission denied",
+        "cat": {
+            "error": "cat: {{0}}: No such file or directory",
+            "success": "#TODO: Move the credentials to a secure place",
+            "password": "root password: admin, you can use sudo -p admin to change user",
+            "unnamed": "Please provide a file name"
+        },
+        "help": {
+            "description": "List all available commands",
+            "help": "help - Show available commands",
+            "projects": "projects - List all projects",
+            "proj": "projects [name] - Display given project informations",
+            "whoami": "whoami - Display user informations",
+            "lang": "lang - Change display language"
+        },
+        "projects": {
+            "error": "Please provide a project name. Available projects are:",
+            "notfound": "{{red}}Project not found: {{0}}{{reset}}",
+            "name": "\n{{green}}Project Name:{{reset}} {{0}}"
+        },
+        "whoami": {
+            "name": "Name: Antoine Dabin",
+            "position": "Position: Backend Developer"
+        },
+        "lang": {
+            "notfound": "'{{0}}' is not supported: Available languagues are 'fr' and 'en'",
+            "error": "Please provide a language"
+        },
+        "sudo": {
+            "wrongPassword": "Wrong password",
+            "error": "Missing arguments"
+        },
+        "killer": {
+            "broke": "Well... You broke it. Good job."
+        }
+    },  
+    "projects": {
+        "scrap": "A web scraper built with TypeScript and Puppeteer. It allows everyday to scraps new chapters of webtoons/manga/manhwa ... depending on a given list of names.",
+        "zenscript": "A simple scripting language interpreter built with TypeScript. It allows to run scripts written in ZenScript.",
+        "portfolio": "My portfolio website built with React. It is a terminal emulator that displays information about me and my projects.",
+        "epihunt": "A discord bot made for the school Epitech that allows user to participage in a large scale game of QR code hunting containing enigmas."
+    },
+    "help": {
+        "help": "Help",
+        "previous": "Previous",
+        "next": "Next",
+        "show": "Show Help",
+        "hide": "Hide Help",
+        "text": {
+            "commandUsage": {
+                "instruction": "How to Use Commands",
+                "description": "Type the name of the command you want to execute. As you type, grey text may appear—this is the autocomplete suggestion. To accept the suggested command, press the <strong>Tab</strong> key. Once the command is complete, press <strong>Enter</strong> to execute it.",
+                "example": {
+                    "step1": "Start typing your command: <strong>he</strong>",
+                    "step2": "Press <strong>Tab</strong> to autocomplete: <strong>help</strong>",
+                    "step3": "Press <strong>Enter</strong> to run the command."
+                }
+            }
+        }
+    }
+}

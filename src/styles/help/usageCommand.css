@@ -1,0 +1,64 @@
+.command-usage-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.command-usage-content h4 {
+    margin-bottom: 15px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.command-usage-content .description {
+    margin-bottom: 15px;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.example-steps p {
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+.media-content {
+    max-width: 70%;
+    margin-bottom: 20px;
+}
+
+/* Uncomment these styles if you decide to bring back the drag and resize functionality */
+
+/* .help-window {
+    position: absolute;
+    z-index: 1000;
+    cursor: move;
+}
+
+.resize-handle {
+    position: absolute;
+    background: transparent;
+}
+
+.resize-handle-right {
+    width: 10px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    cursor: ew-resize;
+}
+
+.resize-handle-bottom {
+    width: 100%;
+    height: 10px;
+    bottom: 0;
+    left: 0;
+    cursor: ns-resize;
+}
+
+.resize-handle-corner {
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
+    cursor: nwse-resize;
+} */
