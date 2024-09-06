@@ -5,6 +5,7 @@ import { Trans, useTranslation } from 'react-i18next';
 
 const HelpWindow: React.FC = () => {
     const [isVisible, setIsVisible] = useState(true);
+    //eslint-disable-next-line
     const [slideIndex, setSlideIndex] = useState(0);
     const [size, setSize] = useState({ width: 0, height: 0 });
     const [position, setPosition] = useState({ x: 0, y: 0 });
