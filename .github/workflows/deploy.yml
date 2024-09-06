@@ -1,0 +1,25 @@
+name: Deploy on PR merge to main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # Adjust the Node.js version as needed
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Deploy application
+      run: yarn deploy
