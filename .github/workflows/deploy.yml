@@ -16,10 +16,19 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '20'  # Adjust the Node.js version as needed
+        node-version: '20'
 
     - name: Install dependencies
       run: yarn install
 
-    - name: Deploy application
-      run: yarn deploy
+    - name: Configure Git for deployment
+      run: |
+        git config --global user.email "adabin@hotmail.fr"
+        git config --global user.name "A-DBN"
+
+    - name: Deploy to GitHub Pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        yarn deploy
