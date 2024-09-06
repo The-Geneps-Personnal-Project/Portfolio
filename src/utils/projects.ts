@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { ExtendedTerminal } from "../types/extendedTerminal";
 
 export function getProjects(term: ExtendedTerminal) {

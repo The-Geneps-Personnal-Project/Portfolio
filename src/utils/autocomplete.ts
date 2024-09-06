@@ -5,30 +5,29 @@ import { colors } from "./colors";
 
 export const showAutocomplete = (term: ExtendedTerminal, partialCommand: string, updateAutocompleteBuffer: (newBuffer: string) => void) => {
     const [cmd, ...args] = partialCommand.trim().split(/\s+/);
+    const projectNamePart = args.join(" ");
+    const getMatches = (list: string[], prefix: string) =>
+        list.filter(item => item.toLowerCase().startsWith(prefix.toLowerCase()));
+
+    const handleAutocomplete = (matches: string[], prefix: string) => {
+        if (matches.length === 1) {
+            const completion = matches[0].substring(prefix.length);
+            term.write(`\x1B[38;5;240m${completion}\x1B[0m`);
+            term.write("\b".repeat(completion.length));
+            updateAutocompleteBuffer(completion);
+        } else {
+            term.write("\x1B[2K\r");
+            term.write(`${colors.pink}> ${colors.reset}${partialCommand}`);
+            updateAutocompleteBuffer("");
+        }
+    };
+
     if (cmd === "projects" && args.length > 0) {
-        const projectNamePart = args.join(" ");
-        const matches = getProjects(term)
-            .map(p => p.name)
-            .filter(name => name.toLowerCase().startsWith(projectNamePart.toLowerCase()));
-        if (matches.length === 1) {
-            const completion = matches[0].substring(projectNamePart.length);
-            term.write(`\x1B[38;5;240m${completion}\x1B[0m`);
-            term.write("\b".repeat(completion.length));
-            updateAutocompleteBuffer(completion);
-        } else {
-            updateAutocompleteBuffer("");
-        }
+        const matches = getMatches(getProjects(term).map(p => p.name), projectNamePart);
+        handleAutocomplete(matches, projectNamePart);
     } else {
-        const commands = getCommands();
-        const matches = commands.filter(c => c.startsWith(partialCommand));
-        if (matches.length === 1) {
-            const completion = matches[0].substring(partialCommand.length);
-            term.write(`\x1B[38;5;240m${completion}\x1B[0m`);
-            term.write("\b".repeat(completion.length));
-            updateAutocompleteBuffer(completion);
-        } else {
-            updateAutocompleteBuffer("");
-        }
+        const matches = getMatches(getCommands(), partialCommand);
+        handleAutocomplete(matches, partialCommand);
     }
 };
 

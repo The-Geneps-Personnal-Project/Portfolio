@@ -2,20 +2,26 @@ import i18n from "../i18n/i18n";
 import { ExtendedTerminal } from "../types/extendedTerminal";
 import { colors, replaceColors } from "./colors";
 import { getProjects } from "./projects";
+import { triggerFall } from "./terminalEffects";
 
 type CommandFunction = (term: ExtendedTerminal, args?: string[]) => void;
 
-function cd(term: ExtendedTerminal) {
+function cd(term: ExtendedTerminal, args?: string[]) {
+    if (args && args.length > 0 && args[0] === "home") return term.setPath("~/home/");
     term.writeln(replaceColors(term.translate("commands.cd")));
 }
 
 function ls(term: ExtendedTerminal) {
-    term.write(`${colors.blue}Documents${colors.reset}  `);
-    term.write(`${colors.blue}Downloads${colors.reset}  `);
-    term.write(`${colors.blue}Pictures${colors.reset}  `);
-    term.write(`${colors.blue}Videos${colors.reset}  `);
-    term.write(`${colors.blue}Music${colors.reset}  `);
-    term.writeln(`credentials.txt`);
+    const root = ["bin", "boot", "dev", "etc", "home", "lib", "mnt", "opt", "proc", "root", "run", "sbin", "srv", "sys", "tmp", "usr", "var"];
+    const home = ["Documents", "Downloads", "Pictures", "Videos", "Music"];
+
+    if (term.getPath().includes("home")) {
+        home.forEach(folder => term.write(`${colors.blue}${folder}${colors.reset} `));	
+        term.writeln(`credentials.txt`);
+    } else if (term.getPath().includes("root")) {
+        root.forEach(folder => term.write(`${colors.blue}${folder}${colors.reset} `));
+        term.writeln(`${colors.green}killer${colors.reset}`);
+    }
 }
 
 function cat(term: ExtendedTerminal, args?: string[]) {
@@ -95,7 +101,7 @@ export const printHome = (term: ExtendedTerminal, prompt: boolean = false) => {
     term.writeln(term.translate("welcome.home"));
     term.writeln(replaceColors(term.translate("welcome.help")));
     term.writeln("");
-    if (prompt) term.write(`${colors.blue}~/home/${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
+    if (prompt) term.write(`${colors.blue}${term.getPath()}${colors.reset}\r\n${colors.pink}> ${colors.reset}`);
 };
 
 const whoami = (term: ExtendedTerminal) => {
@@ -116,8 +122,23 @@ const lang = (term: ExtendedTerminal, args?: string[]) => {
     }
 };
 
-const sudo = (term: ExtendedTerminal) => {
-    term.write(term.translate("commands.sudo.prompt"));
+const killer = (term: ExtendedTerminal) => {
+    if (!term.getPath().includes("root")) return term.writeln(term.translate("commands.permissions", { 0: "killer"}));
+    
+    triggerFall(term);
+}
+
+const sudo = (term: ExtendedTerminal, args?: string[]) => {
+    if (args && args.length > 0) {
+        console.log(args)
+        if (args[0] === "-p" && args[1] === "admin") {
+            term.setPath("/root/");
+        } else {
+            term.writeln(term.translate("commands.sudo.wrongPassword"));
+        }
+    } else {
+        term.writeln(term.translate("commands.sudo.error"));
+    }
 };
 
 export const handleCommand = (term: ExtendedTerminal, command: string) => {
@@ -131,6 +152,7 @@ export const handleCommand = (term: ExtendedTerminal, command: string) => {
         cat,
         lang,
         sudo,
+        killer
     };
 
     const [cmd, ...args] = command.trim().split(/\s+/);

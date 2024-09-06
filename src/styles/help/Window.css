@@ -8,14 +8,14 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    resize: both;
+    /* resize: both; */
     user-select: none;
 }
 
 .help-header {
     background-color: #444;
     padding: 10px;
-    cursor: move;
+    /* cursor: move; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -97,7 +97,7 @@
     background-color: #666;
 }
 
-.resize-handle {
+/* .resize-handle {
     position: absolute;
     background-color: transparent;
     z-index: 1001;
@@ -125,7 +125,7 @@
     width: 10px;
     height: 10px;
     cursor: nwse-resize;
-}
+} */
 
 .language-icon {
     width: 32px;
