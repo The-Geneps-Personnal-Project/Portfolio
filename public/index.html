@@ -4,28 +4,65 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="A-DBN Portfolio"
-      content="Terminal Portfolio for A-DBN"
-    />
+    <meta name="A-DBN Portfolio" content="Terminal Portfolio for A-DBN" />
     <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
     <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest">
     <title>A-DBN Portfolio</title>
+    <style>
+      #root {
+        display: none;
+      }
+      #mobile-message {
+        display: none;
+        text-align: center;
+        font-size: 20px;
+        color: white;
+        background-color: #282c34;
+        border: 1px solid grey;
+        padding: 2%;
+        width: 80%;
+        margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div id="mobile-message">
+      <p>Sorry, this site is not accessible on mobile devices. Please visit from a desktop browser.</p>
+    </div>
+  
+    <script>
+      function isMobile() {
+        return /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone|Opera Mini|IEMobile/i.test(navigator.userAgent);
+      }
+  
+      document.addEventListener("DOMContentLoaded", function() {
+        if (isMobile()) {
+          document.getElementById('mobile-message').style.display = 'block';
+          document.getElementById('mobile-message').querySelector('p').textContent = 
+                  navigator.language.includes("us") ? 
+                  'Sorry, this site is not accessible on mobile devices. Please visit from a desktop browser.':
+                  'Ce site n\'est pas accessible sur les appareils mobiles. Veuillez visiter à partir d\'un ordinateur.';
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+          var style = document.createElement('style');
+          style.innerHTML = `
+            html, body {
+              height: 100%;
+              margin: 0;
+              background-color: #282c34;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          `;
+          document.head.appendChild(style);
+        } else {
+          document.getElementById('root').style.display = 'block';
+        }
+      });
+    </script>
   </body>
 </html>
